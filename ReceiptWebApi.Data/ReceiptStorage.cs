@@ -20,7 +20,7 @@ namespace ReceiptWebApi.Data
             return receipt;
         }
 
-        public static void Delete(int id)
+        public static void DeleteReceiptById(int id)
         {
           
             var receiptListRange = _receiptStorage.Count;
@@ -74,7 +74,7 @@ namespace ReceiptWebApi.Data
         public static void ClearReceiptStorage()
         {
             _receiptStorage.Clear();
-            _id = 0;
+            _id = 1;
         }
 
         public static List<Receipt> GetFilteredReceiptsByProductName(string theProduct)
