@@ -11,9 +11,7 @@ namespace ReceiptWebApi.Core
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
 
-        public List<string> Items { get; set; }
-
-        public string ProductName { get; set; }
+        public List<Product> Items { get; set; }        
 
         //public Receipt(DateTime createdOn, string itemsList, string productName)
         //{

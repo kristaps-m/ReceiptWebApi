@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWebApi.Data", "Recei
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWebApi.Core", "ReceiptWebApi.Core\ReceiptWebApi.Core.csproj", "{D1968283-F7ED-45AD-8AD5-345027A62C68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiptWebApi.Tests", "ReceiptWebApi.Tests\ReceiptWebApi.Tests.csproj", "{0F9708E6-68EF-4D5F-B842-2EB6308950A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D1968283-F7ED-45AD-8AD5-345027A62C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1968283-F7ED-45AD-8AD5-345027A62C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1968283-F7ED-45AD-8AD5-345027A62C68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F9708E6-68EF-4D5F-B842-2EB6308950A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F9708E6-68EF-4D5F-B842-2EB6308950A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F9708E6-68EF-4D5F-B842-2EB6308950A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F9708E6-68EF-4D5F-B842-2EB6308950A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
