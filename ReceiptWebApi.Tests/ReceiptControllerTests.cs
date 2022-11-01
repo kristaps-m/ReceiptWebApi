@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReceiptWebApi.Controllers;
 using ReceiptWebApi.Core;
+using ReceiptWebApi.Data;
 using System;
 using System.Collections.Generic;
 
@@ -18,11 +19,13 @@ namespace ReceiptWebApi.Tests
         private DateTime _created3;
 
         private ReceiptWebApiController _controller;
+        private IReceiptStorage _receiptStorage;
 
         [TestInitialize]
         public void Setup()
         {
-            _controller = new ReceiptWebApiController();
+            _receiptStorage = new ReceiptStorage();
+            _controller = new ReceiptWebApiController(_receiptStorage);
             _receipt = new Receipt();
             _created = new DateTime(2019, 1, 1, 23, 30, 00);
             var items = new List<Product>() { new Product("cat"), new Product("dog") };

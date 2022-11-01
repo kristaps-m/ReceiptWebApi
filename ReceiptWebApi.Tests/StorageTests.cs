@@ -16,10 +16,13 @@ namespace ReceiptWebApi.Tests
         private DateTime _created;
         private DateTime _created2;
         private DateTime _created3;
+        private IReceiptStorage _receiptStorage;
 
         [TestInitialize]
         public void Setup()
         {
+            _receiptStorage = new ReceiptStorage();
+
             _receipt = new Receipt();
             _created = new DateTime(2019, 1, 1, 23, 30, 00);
             var items = new List<Product>() { new Product("cat"), new Product("dog") };
@@ -43,9 +46,9 @@ namespace ReceiptWebApi.Tests
         public void AddReceipt_AddValidReceipt_ReceiptAdded()
         {
             // Act
-            ReceiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt);
             // Assert
-            Action action = () => ReceiptStorage.GetReceipt(1);
+            Action action = () => _receiptStorage.GetReceipt(1);
             action.Should().NotBeNull();
         }
 
@@ -53,11 +56,11 @@ namespace ReceiptWebApi.Tests
         public void AddReceipt_AddTwoValidReceipts_StorageShouldContainTwoReceipts()
         {
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetListOfReceipts();
+            var listOfReceipts = _receiptStorage.GetListOfReceipts();
             listOfReceipts.Count.Should().Be(2);
         }
 
@@ -65,11 +68,11 @@ namespace ReceiptWebApi.Tests
         public void AddReceipt_AddTwoValidReceipts_StorageContainsValidReceipts()
         {
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetListOfReceipts();
+            var listOfReceipts = _receiptStorage.GetListOfReceipts();
             listOfReceipts.Count.Should().Be(2);
             listOfReceipts.Should().ContainEquivalentOf(_receipt);
             listOfReceipts.Should().ContainEquivalentOf(_receipt2);
@@ -79,12 +82,12 @@ namespace ReceiptWebApi.Tests
         public void DeleteReceiptById_DeleteReceipt_ReceiptShouldBeDeleted()
         {
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
             // Assert
-            ReceiptStorage.DeleteReceiptById(1);
-            var listOfReceipts = ReceiptStorage.GetListOfReceipts();
+            _receiptStorage.DeleteReceiptById(1);
+            var listOfReceipts = _receiptStorage.GetListOfReceipts();
             listOfReceipts.Should().NotContainEquivalentOf(_receipt);
             listOfReceipts.Should().ContainEquivalentOf(_receipt2);
             listOfReceipts.Count.Should().Be(1);
@@ -97,12 +100,12 @@ namespace ReceiptWebApi.Tests
             var from = new DateTime(2020, 1, 1);
             var to = new DateTime(2021, 10, 10);
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
-            ReceiptStorage.AddReceipt(_receipt3);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.AddReceipt(_receipt3);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetByCreationDate(from,to);
+            var listOfReceipts = _receiptStorage.GetByCreationDate(from,to);
             listOfReceipts.Count.Should().Be(1);
             listOfReceipts.Should().ContainEquivalentOf(_receipt2);
         }
@@ -114,12 +117,12 @@ namespace ReceiptWebApi.Tests
             var from = new DateTime(2017, 1, 1);
             var to = new DateTime(2023, 10, 10);
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
-            ReceiptStorage.AddReceipt(_receipt3);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.AddReceipt(_receipt3);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetByCreationDate(from, to);
+            var listOfReceipts = _receiptStorage.GetByCreationDate(from, to);
             listOfReceipts.Count.Should().Be(3);
             listOfReceipts.Should().ContainEquivalentOf(_receipt);
             listOfReceipts.Should().ContainEquivalentOf(_receipt2);
@@ -132,12 +135,12 @@ namespace ReceiptWebApi.Tests
             // Arrange
             var searchProduct = "knife";
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
-            ReceiptStorage.AddReceipt(_receipt3);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.AddReceipt(_receipt3);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetFilteredReceiptsByProductName(searchProduct);
+            var listOfReceipts = _receiptStorage.GetFilteredReceiptsByProductName(searchProduct);
             listOfReceipts.Count.Should().Be(1);
             listOfReceipts.Should().ContainEquivalentOf(_receipt3);
         }
@@ -148,12 +151,12 @@ namespace ReceiptWebApi.Tests
             // Arrange
             var searchProduct = "Bred Pit";
             // Act
-            ReceiptStorage.ClearReceiptStorage();
-            ReceiptStorage.AddReceipt(_receipt);
-            ReceiptStorage.AddReceipt(_receipt2);
-            ReceiptStorage.AddReceipt(_receipt3);
+            _receiptStorage.ClearReceiptStorage();
+            _receiptStorage.AddReceipt(_receipt);
+            _receiptStorage.AddReceipt(_receipt2);
+            _receiptStorage.AddReceipt(_receipt3);
             // Assert
-            var listOfReceipts = ReceiptStorage.GetFilteredReceiptsByProductName(searchProduct);
+            var listOfReceipts = _receiptStorage.GetFilteredReceiptsByProductName(searchProduct);
             listOfReceipts.Count.Should().Be(0);
             listOfReceipts.Should().BeEmpty();
         }

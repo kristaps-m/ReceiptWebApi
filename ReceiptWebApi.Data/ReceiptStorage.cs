@@ -5,21 +5,21 @@ using System.Linq;
 
 namespace ReceiptWebApi.Data
 {
-    public class ReceiptStorage
+    public class ReceiptStorage : IReceiptStorage
     {
-        private static List<Receipt> _receiptsStorage = new List<Receipt>();
-        private static int _id = 1;
+        private List<Receipt> _receiptsStorage = new List<Receipt>();
+        private int _id = 1;
 
-        public static Receipt AddReceipt(Receipt receipt)
+        public Receipt AddReceipt(Receipt receipt)
         {
             receipt.Id = _id++;
             _receiptsStorage.Add(receipt);
-            
+
             return receipt;
         }
 
-        public static void DeleteReceiptById(int id)
-        {          
+        public void DeleteReceiptById(int id)
+        {
             var receiptListRange = _receiptsStorage.Count;
             var theReceiptIndex = 0;
 
@@ -34,31 +34,31 @@ namespace ReceiptWebApi.Data
                 }
 
                 _receiptsStorage.RemoveAt(theReceiptIndex);
-            }            
+            }
         }
 
-        public static Receipt GetReceipt(int id)
-        {         
+        public Receipt GetReceipt(int id)
+        {
             if (id <= _receiptsStorage.Count && id >= 0)
             {
                 return _receiptsStorage.FirstOrDefault(f => f.Id == id);
-            }            
+            }
 
             return null;
         }
 
-        public static List<Receipt> GetListOfReceipts()
+        public List<Receipt> GetListOfReceipts()
         {
             return _receiptsStorage;
         }
 
-        public static List<Receipt> GetByCreationDate(DateTime from, DateTime to)
+        public List<Receipt> GetByCreationDate(DateTime from, DateTime to)
         {
             var receiptList = new List<Receipt>();
 
             foreach (var receipt in _receiptsStorage)
             {
-                if (receipt.CreatedOn >= from && 
+                if (receipt.CreatedOn >= from &&
                     receipt.CreatedOn <= to)
                 {
                     receiptList.Add(receipt);
@@ -68,13 +68,13 @@ namespace ReceiptWebApi.Data
             return receiptList;
         }
 
-        public static void ClearReceiptStorage()
+        public void ClearReceiptStorage()
         {
             _receiptsStorage.Clear();
             _id = 1;
         }
 
-        public static List<Receipt> GetFilteredReceiptsByProductName(string theProduct)
+        public List<Receipt> GetFilteredReceiptsByProductName(string theProduct)
         {
             var receiptList = new List<Receipt>();
 
