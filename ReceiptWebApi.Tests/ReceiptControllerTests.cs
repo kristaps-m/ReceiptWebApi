@@ -1,12 +1,9 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReceiptWebApi.Controllers;
 using ReceiptWebApi.Core;
-using ReceiptWebApi.Data;
 using System;
 using System.Collections.Generic;
-using System.Web.Http;
 
 namespace ReceiptWebApi.Tests
 {
