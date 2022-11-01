@@ -15,11 +15,11 @@ namespace ReceiptWebApi.Core
 
         public string ProductName { get; set; }
 
-        public Receipt(DateTime createdOn, List<string> itemsList, string productName)
-        {
-            CreatedOn = createdOn;
-            Items = itemsList;
-            ProductName = productName;
-        }
+        //public Receipt(DateTime createdOn, string itemsList, string productName)
+        //{
+        //    CreatedOn = createdOn;
+        //    Items = itemsList;
+        //    ProductName = productName;
+        //}
     }
 }
